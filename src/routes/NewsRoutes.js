@@ -1,0 +1,38 @@
+import express from "express";
+import multer from "multer";
+import NewsController from "../controller/Controller.js";
+const router = express.Router();
+
+router.get("/", (req, res) => {
+  res.send("Backend is working");
+});
+
+// upload img
+let imageName;
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "public/upload/");
+    },
+    filename: function (req, file, cb) {
+        imageName =
+        Date.now() +
+        "-" +
+        Math.round(Math.random() * 1e9) +
+        "_" +
+        file.originalname.trim();
+      cb(null, imageName);
+    },
+  });
+
+const upload = multer({storage:storage});
+
+
+// Creating Object
+const newsController = new NewsController();
+
+// adding news
+router.post("/add",upload.single('image'),(req,res) =>{
+    newsController.addNews(req,res,imageName)
+});
+
+export default router;
