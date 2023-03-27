@@ -29,6 +29,21 @@ class NewsController {
       console.log(error);
     }
   }
+
+  // getNews all
+  async getNews(req,res){
+        try {
+            const data = await NewsModel.find();
+            if(data){
+                res.json(data);
+            }else{
+                res.json("Something went wrong")
+            }
+        } catch (error) {
+            console.log(error)
+            res.json(error)
+        }
+  }
 }
 
 export default NewsController;
