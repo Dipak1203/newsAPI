@@ -54,6 +54,12 @@ router.patch('/update/:id',(req,res) =>{
   newsController.updateNews(req,res,id)  
 })
 
+// Delete Data
+router.delete('/delete/:id',async(req,res) =>{
+    const id = req.params.id;
+    newsController.deleteNews(req,res,id);
+});
+
 
 
 export default router;

@@ -67,6 +67,24 @@ class NewsController {
   }
 
   // Delete News By ID
+  async deleteNews(req, res, id) {
+    try {
+      if (id) {
+        const data = await NewsModel.findByIdAndDelete({ _id: id });
+        if (data) {
+          console.log("Data deleted");
+         await res.json({success:true,message:"Data has been deleted"})
+        } else {
+          console.log("Data already deleted");
+          res.json({success:false,message:"Data already deleted"})
+        }
+      } else {
+        res.json("couldn't found data");
+      }
+    } catch (err) {
+      res.json(err);
+    }
+  }
 }
 
 export default NewsController;
