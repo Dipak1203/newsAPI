@@ -46,6 +46,12 @@ router.get('/show/:id',(req,res) =>{
 // get News all
 router.get('/show',(req,res) =>{
     newsController.getNews(req,res);
+});
+
+// Update One
+router.patch('/update/:id',(req,res) =>{
+    const id = req.params.id;
+  newsController.updateNews(req,res,id)  
 })
 
 
