@@ -35,4 +35,10 @@ router.post("/add",upload.single('image'),(req,res) =>{
     newsController.addNews(req,res,imageName)
 });
 
+
+// get news One 
+router.get('/show/:id',(req,res) =>{
+    const id = req.params.id;
+    newsController.getNewsByOne(req,res,id);
+})
 export default router;
